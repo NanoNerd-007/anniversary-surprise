@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy 1 Year — For Sabrina Jannat Roshni</title>
+  <style>
+    :root{
+      --bg1:#ffd6e7; /* light rose */
+      --bg2:#f3e8ff; /* lavender */
+      --accent:#ff4d8b; /* pink */
+      --muted:#6b5b7b;
+      --glass: rgba(255,255,255,0.6);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;color:#2b2330}
+    body{
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(255,200,220,0.6), transparent),
+                  linear-gradient(135deg,var(--bg1),var(--bg2));
+      display:flex;align-items:center;justify-content:center;padding:40px;
+    }
+    .card{
+      width:960px;max-width:96%;min-height:560px;border-radius:20px;padding:28px;backdrop-filter: blur(6px);
+      background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.45));
+      box-shadow: 0 10px 40px rgba(107,91,123,0.18);
+      position:relative;overflow:hidden;
+    }
+    header{display:flex;gap:16px;align-items:center}
+    .title{font-size:28px;font-weight:700;color:var(--accent);}
+    .subtitle{color:var(--muted);font-size:14px}
+
+    .stage{margin-top:18px;display:flex;gap:24px}
+    .left{flex:1}
+    .right{width:340px}
+
+    .message-wrap{height:360px;display:flex;align-items:center;justify-content:center;position:relative}
+    .message{
+      position:absolute;max-width:68%;text-align:center;padding:20px 28px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.8));
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);font-size:20px;line-height:1.45;color:#2b2330;opacity:0;transform:translateY(20px) scale(0.98);
+      transition:all 700ms cubic-bezier(.2,.9,.18,1);
+    }
+    .message.show{opacity:1;transform:translateY(0) scale(1)}
+
+    .controls{display:flex;gap:12px;justify-content:center;margin-top:18px}
+    button{padding:12px 18px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+    .yes{background:linear-gradient(90deg,var(--accent),#ff7bb3);color:white}
+    .no{background:transparent;border:2px solid rgba(43,35,48,0.08);color:var(--muted);position:relative}
+
+    /* floating emoji particles */
+    .particle{position:absolute;font-size:20px;pointer-events:none;opacity:0}
+
+    /* right card */
+    .info{background:var(--glass);border-radius:12px;padding:16px}
+    .info h4{margin:6px 0;color:var(--accent)}
+    .pill{display:inline-block;background:rgba(255,255,255,0.7);padding:6px 10px;border-radius:999px;margin:6px 6px 6px 0;font-size:13px}
+
+    /* little heart burst */
+    .burst{position:absolute;inset:0;pointer-events:none}
+    .heart{position:absolute;font-size:18px;opacity:0;transform:translate(-50%,-50%) scale(0.6)}
+
+    /* make the no button harder to click area */
+    .no-area{position:relative}
+
+    footer{position:absolute;left:24px;bottom:18px;color:var(--muted);font-size:13px}
+
+    /* small responsive tweaks */
+    @media (max-width:800px){
+      .stage{flex-direction:column}
+      .right{width:100%}
+      .message{max-width:90%}
+      .card{padding:18px}
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <header>
+      <div>
+        <div class="title">Happy 1 Year, Sabrina 💖</div>
+        <div class="subtitle">A little surprise made with every silly, soft, fierce piece of my heart.</div>
+      </div>
+    </header>
+
+    <div class="stage">
+      <div class="left">
+        <div class="message-wrap" id="messageWrap">
+          <!-- messages injected here -->
+        </div>
+
+        <div class="controls">
+          <button class="yes" id="yesBtn">Yes — I love you too ❤️</button>
+          <div class="no-area">
+            <button class="no" id="noBtn">Not sure yet 😔</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="info">
+          <h4>Sabrina Jannat Roshni</h4>
+          <p class="subtitle">A poem, a smile that stole my little heart. Loves dark-rom novels, sings, overthinks — and keeps birds close.</p>
+          <div style="margin-top:10px">
+            <strong>How to comfort her</strong>
+            <div class="pill">No logic when she's upset</div>
+            <div class="pill">Talk & voice notes</div>
+            <div class="pill">Be a bit clingy</div>
+            <div class="pill">Give flowers & poems</div>
+          </div>
+
+          <div style="margin-top:12px">
+            <strong>Favourites</strong>
+            <div class="pill">Apples</div>
+            <div class="pill">K-drama</div>
+            <div class="pill">Chocolate & Mint ice cream</div>
+            <div class="pill">Emojis: 😔</div>
+            <div class="pill">Roses, Tulips, Lavenders</div>
+          </div>
+
+          <div style="margin-top:12px">
+            <strong>Hobbies</strong>
+            <div class="pill">Singing</div>
+            <div class="pill">Overthinking</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="burst" id="burst"></div>
+    <footer>Made with love — say it, mean it. 💌</footer>
+  </div>
+
+  <script>
+    /*******************************
+     * Content customized from your notes
+     *******************************/
+    const messages = [
+      "Sabrina Jannat Roshni — a little poem, a big smile. You turned my calm into a beautiful storm.",
+      "You read dark-rom novels and sing to the quiet — and somehow I learned that I love you more than I ever knew possible.",
+      "Your birds, your shy trust, your tiny insecurities — all of it is mine to keep safe, gently.",
+      "When you smile (uffff — my lil heart), everything else becomes small and unimportant.",
+      "I know I haven't been perfect. I promise to be more present — for our better future and all our small mornings.",
+      "Will you keep loving me? Will you let me love you fiercely, write you poems, and give you silly pictures forever?"
+    ];
+
+    const emojis = ['❤️', '🌹', '💫', '😔', '🎶', '🕊️', '🍎', '🍦'];
+
+    // render messages
+    const wrap = document.getElementById('messageWrap');
+    messages.forEach((t,i)=>{
+      const d = document.createElement('div');
+      d.className = 'message';
+      d.dataset.index = i+1;
+      d.innerHTML = `<strong>Message ${i+1}</strong><br><div style="margin-top:8px">${t}</div>`;
+      wrap.appendChild(d);
+    });
+
+    const messageEls = Array.from(document.querySelectorAll('.message'));
+    let cur = 0;
+    function showIndex(n){
+      messageEls.forEach(m=>m.classList.remove('show'));
+      const el = messageEls[n];
+      if(el) el.classList.add('show');
+    }
+    showIndex(0);
+
+    // auto-advance messages slowly to feel cinematic
+    let autoTimer = setInterval(()=>{
+      cur = (cur+1) % messageEls.length;
+      showIndex(cur);
+    }, 4500);
+
+    // particles generator
+    function spawnParticle(){
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      document.body.appendChild(p);
+      const startX = Math.random()*window.innerWidth;
+      const startY = window.innerHeight + 20;
+      p.style.left = startX + 'px';
+      p.style.top = startY + 'px';
+      p.style.opacity = 1;
+      const endX = startX + (Math.random()*200-100);
+      const endY = -80 - Math.random()*200;
+      const dur = 6000 + Math.random()*5000;
+      p.animate([{transform:`translateY(0)`, opacity:1, offset:0},{transform:`translate(${endX-startX}px, ${endY-startY}px) scale(1.2)`, opacity:0.02, offset:1}],{duration:dur,easing:'linear'}).onfinish = ()=>p.remove();
+    }
+    setInterval(spawnParticle, 700);
+
+    // heart burst celebration
+    function burstHearts(x,y){
+      const burst = document.getElementById('burst');
+      for(let i=0;i<28;i++){
+        const h = document.createElement('div');
+        h.className='heart';
+        h.innerText = '❤️';
+        burst.appendChild(h);
+        const angle = Math.random()*Math.PI*2;
+        const speed = 80 + Math.random()*260;
+        const dx = Math.cos(angle)*speed;
+        const dy = Math.sin(angle)*speed;
+        h.style.left = (x + Math.random()*20 -10) + 'px';
+        h.style.top = (y + Math.random()*20 -10) + 'px';
+        h.animate([
+          {transform:'translate(-50%,-50%) scale(0.6)', opacity:1},
+          {transform:`translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(1)`, opacity:1},
+          {transform:`translate(calc(-50% + ${dx*1.6}px), calc(-50% + ${dy*1.6}px)) scale(0.2)`, opacity:0}
+        ],{duration:900+Math.random()*700,easing:'cubic-bezier(.2,.9,.3,1)'}).onfinish = ()=>h.remove();
+      }
+    }
+
+    // yes button behavior
+    const yesBtn = document.getElementById('yesBtn');
+    yesBtn.addEventListener('click', (e)=>{
+      clearInterval(autoTimer);
+      // show loving final message
+      const final = document.createElement('div');
+      final.className='message show';
+      final.innerHTML = `<strong>For you — forever</strong><div style="margin-top:8px">Sabrina, will you be my always? I'm here, fully, for us.</div>`;
+      wrap.appendChild(final);
+      // burst at button center
+      const r = yesBtn.getBoundingClientRect();
+      burstHearts(r.left + r.width/2, r.top + r.height/2);
+      // small confetti of emojis
+      for(let i=0;i<12;i++){setTimeout(spawnParticle, i*80)}
+    });
+
+    // tricky / evasive "Not sure yet" button
+    const noBtn = document.getElementById('noBtn');
+    const noArea = document.querySelector('.no-area');
+    let evadeLevel = 0;
+
+    // function to move button to a new safe spot within parent
+    function moveNoToRandom(){
+      const areaRect = noArea.getBoundingClientRect();
+      const parentRect = document.querySelector('.controls').getBoundingClientRect();
+      // compute small offsets to keep inside controls
+      const pad = 6 + Math.min(60, 10 + evadeLevel*10);
+      const maxX = parentRect.width - areaRect.width - pad;
+      const x = Math.max(0, Math.min(maxX, Math.random()*maxX));
+      noArea.style.transform = `translateX(${x}px)`;
+      // increase difficulty
+      evadeLevel = Math.min(12, evadeLevel + 1);
+    }
+
+    // when mouse gets near, move quickly. Make it harder each time.
+    noArea.addEventListener('mouseenter', ()=>{
+      // small random delay then jump
+      setTimeout(()=>moveNoToRandom(), 80 + Math.random()*180 - Math.min(120,evadeLevel*10));
+    });
+
+    // also on mousemove over controls, if pointer is within threshold, move
+    document.querySelector('.controls').addEventListener('mousemove',(ev)=>{
+      const b = noArea.getBoundingClientRect();
+      const dx = ev.clientX - (b.left + b.width/2);
+      const dy = ev.clientY - (b.top + b.height/2);
+      const dist = Math.sqrt(dx*dx+dy*dy);
+      if(dist < 120 + (10*evadeLevel)){
+        moveNoToRandom();
+      }
+    });
+
+    // If user manages to click the no button (rare!), gently show a message
+    noBtn.addEventListener('click',()=>{
+      clearInterval(autoTimer);
+      const sorry = document.createElement('div');
+      sorry.className='message show';
+      sorry.innerHTML = `<strong>Take your time</strong><div style="margin-top:8px">I understand. Whenever you're ready, I'll be here — with flowers, poems, and my voice notes.</div>`;
+      wrap.appendChild(sorry);
+      // calm particle
+      for(let i=0;i<6;i++)setTimeout(spawnParticle, i*300);
+    });
+
+    // tiny accessibility: allow keyboard yes/no
+    document.addEventListener('keydown',(e)=>{
+      if(e.key === 'y') yesBtn.click();
+      if(e.key === 'n') noBtn.click();
+    });
+
+    // small animation: pulse the title now and then
+    setInterval(()=>{
+      document.querySelector('.title').animate([{transform:'scale(1)'},{transform:'scale(1.03)'},{transform:'scale(1)'}],{duration:1400,easing:'ease-in-out'});
+    },4200);
+
+  </script>
+</body>
+</html>
